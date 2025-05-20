@@ -20,10 +20,10 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
   };
 
   return (
-    <div className="w-full max-w-md mx-auto mb-8 flex flex-col">
-      <div className="text-center mb-2">
-        <span className="text-[#00FF00] opacity-70 text-xl">// </span>
-        <span className="text-xl font-bold">SELECT FX TYPE</span>
+    <div className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto mb-4 sm:mb-6 md:mb-8 flex flex-col">
+      <div className="text-center mb-1 sm:mb-2">
+        <span className="text-[#00FF00] opacity-70 text-lg sm:text-xl">// </span>
+        <span className="text-lg sm:text-xl font-bold">SELECT FX TYPE</span>
       </div>
       
       <div className="bg-black/40 backdrop-blur-sm border-2 border-[#33FF33]/40 rounded-lg p-1 flex relative overflow-hidden">
@@ -52,12 +52,12 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
         {/* INPUT FX Button */}
         <button
           onClick={() => handleSelect("INPUT")}
-          className={`flex-1 py-3 px-4 text-center relative z-10 transition-all duration-300 rounded disabled:opacity-50`}
+          className={`flex-1 py-2 sm:py-3 px-2 sm:px-4 text-center relative z-10 transition-all duration-300 rounded disabled:opacity-50`}
           disabled={isAnimating}
         >
           <div className="flex flex-col items-center">
             <span 
-              className={`text-2xl font-bold tracking-wider transition-colors ${
+              className={`text-base sm:text-xl md:text-2xl font-bold tracking-wider transition-colors ${
                 fxType === "INPUT" 
                   ? "text-[#00FF00]" 
                   : "text-[#00FF00]/60 hover:text-[#00FF00]/80"
@@ -67,9 +67,9 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
             </span>
             {fxType === "INPUT" && (
               <motion.div 
-                className="w-16 h-0.5 bg-[#00FF00] mt-1"
+                className="w-12 sm:w-16 h-0.5 bg-[#00FF00] mt-1"
                 initial={{ width: 0 }}
-                animate={{ width: 64 }}
+                animate={{ width: ["0px", "48px", "48px"] }}
                 transition={{ duration: 0.3 }}
               />
             )}
@@ -79,12 +79,12 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
         {/* TRACK FX Button */}
         <button
           onClick={() => handleSelect("TRACK")}
-          className={`flex-1 py-3 px-4 text-center relative z-10 transition-all duration-300 rounded disabled:opacity-50`}
+          className={`flex-1 py-2 sm:py-3 px-2 sm:px-4 text-center relative z-10 transition-all duration-300 rounded disabled:opacity-50`}
           disabled={isAnimating}
         >
           <div className="flex flex-col items-center">
             <span 
-              className={`text-2xl font-bold tracking-wider transition-colors ${
+              className={`text-base sm:text-xl md:text-2xl font-bold tracking-wider transition-colors ${
                 fxType === "TRACK" 
                   ? "text-[#00FF00]" 
                   : "text-[#00FF00]/60 hover:text-[#00FF00]/80"
@@ -94,9 +94,9 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
             </span>
             {fxType === "TRACK" && (
               <motion.div 
-                className="w-16 h-0.5 bg-[#00FF00] mt-1"
+                className="w-12 sm:w-16 h-0.5 bg-[#00FF00] mt-1"
                 initial={{ width: 0 }}
-                animate={{ width: 64 }}
+                animate={{ width: ["0px", "48px", "48px"] }}
                 transition={{ duration: 0.3 }}
               />
             )}
@@ -104,7 +104,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
         </button>
       </div>
       
-      <div className="text-center text-base mt-2 text-[#33FF33]/70">
+      <div className="text-center text-xs sm:text-sm md:text-base mt-1 sm:mt-2 text-[#33FF33]/70">
         {fxType === "INPUT" ? 
           "Standard effects for input processing" : 
           "Includes beat-based effects for track manipulation"}

@@ -142,37 +142,37 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b border-[#00FF00]/30 py-4 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <header className="border-b border-[#00FF00]/30 py-3 px-3 sm:py-4 sm:px-4 md:px-6">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
           <div>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#00FF00]">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#00FF00] text-center sm:text-left">
               Random FX for Loopers
             </h1>
           </div>
-          <div className="hidden md:flex items-center text-[#33FF33] text-base">
+          <div className="flex items-center text-[#33FF33] text-sm sm:text-base mt-2 sm:mt-0">
             <span className="mr-2 opacity-70">RC505mk2</span>
-            <div className="h-5 w-5 rounded-full bg-[#00CC00] animate-pulse"></div>
+            <div className="h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-[#00CC00] animate-pulse"></div>
           </div>
         </div>
       </header>
       
-      <main className="flex-1 py-8 px-4 md:px-6">
+      <main className="flex-1 py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           {/* Digital-style display */}
-          <div className="rounded-md bg-black border-2 border-[#1A1A1A] mb-8 overflow-hidden relative">
+          <div className="rounded-md bg-black border-2 border-[#1A1A1A] mb-4 sm:mb-6 md:mb-8 overflow-hidden relative">
             <div className="scanline"></div>
-            <div className="p-4 md:p-8">
-              <div className="flex flex-col md:flex-row md:justify-between mb-6 items-start md:items-center">
-                <h2 className="text-xl md:text-2xl text-[#00FF00] mb-2 md:mb-0 font-bold">
-                  <span className="opacity-70">// </span>Effect Combination Generator
+            <div className="p-3 sm:p-4 md:p-6 lg:p-8">
+              <div className="flex flex-col md:flex-row md:justify-between mb-4 md:mb-6 items-start md:items-center">
+                <h2 className="text-lg sm:text-xl md:text-2xl text-[#00FF00] mb-2 md:mb-0 font-bold">
+                  <span className="opacity-70">// </span>Effect Generator
                 </h2>
-                <div className="flex items-center text-base space-x-6">
+                <div className="flex flex-wrap items-center text-xs sm:text-sm md:text-base space-x-4 sm:space-x-6">
                   <div className="flex items-center">
-                    <span className={`h-3 w-3 rounded-full bg-[#00CC00] ${isGenerating ? "animate-pulse" : ""} mr-2`}></span>
+                    <span className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-[#00CC00] ${isGenerating ? "animate-pulse" : ""} mr-1 sm:mr-2`}></span>
                     <span className="opacity-70">{status}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="mr-2 opacity-70">SYSTEM:</span>
+                    <span className="mr-1 sm:mr-2 opacity-70">SYSTEM:</span>
                     <span className="text-[#00FF00]">ONLINE</span>
                   </div>
                 </div>
@@ -188,7 +188,7 @@ export default function Home() {
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={fxType}
-                  className="grid grid-cols-2 xl:grid-cols-4 gap-8 mb-8"
+                  className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 mb-6 md:mb-8 max-w-[90%] sm:max-w-[95%] mx-auto"
                   variants={containerVariants}
                   initial="hidden"
                   animate="visible"
@@ -223,14 +223,14 @@ export default function Home() {
         </div>
       </main>
       
-      <footer className="border-t border-[#00FF00]/30 py-4 px-4 md:px-6 text-sm text-[#33FF33]/70">
+      <footer className="border-t border-[#00FF00]/30 py-3 sm:py-4 px-3 sm:px-4 md:px-6 text-xs sm:text-sm text-[#33FF33]/70">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div>
             <p>Random FX for Loopers v1.0</p>
           </div>
-          <div className="mt-2 md:mt-0 flex items-center space-x-2">
+          <div className="mt-2 md:mt-0 flex flex-col sm:flex-row items-center sm:space-x-2">
             <p>RC505mk2 Effect Randomizer Tool</p>
-            <span className="px-2">|</span>
+            <span className="hidden sm:inline px-2">|</span>
             <p>Developed by <a href="https://twitter.com/arinomi" target="_blank" rel="noopener noreferrer" className="text-[#00FF00] hover:underline">@arinomi</a></p>
           </div>
         </div>

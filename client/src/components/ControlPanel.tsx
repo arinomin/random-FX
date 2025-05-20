@@ -53,7 +53,7 @@ export function ControlPanel({ onGenerateClick, isGenerating }: ControlPanelProp
         whileTap="pressed"
         onClick={handleClick}
         disabled={isGenerating}
-        className={`relative bg-[#1A1A1A] hover:bg-[#333333] border-2 border-[#00FF00]/50 rounded-lg py-5 px-10 font-bold text-2xl transition-colors duration-300 focus:outline-none w-full max-w-md disabled:cursor-not-allowed overflow-hidden ${
+        className={`relative bg-[#1A1A1A] hover:bg-[#333333] border-2 border-[#00FF00]/50 rounded-lg py-3 sm:py-4 md:py-5 px-4 sm:px-6 md:px-10 font-bold text-lg sm:text-xl md:text-2xl transition-colors duration-300 focus:outline-none w-full max-w-xs sm:max-w-sm md:max-w-md disabled:cursor-not-allowed overflow-hidden ${
           isPressed ? "bg-[#00FF00]" : ""
         }`}
       >
@@ -71,7 +71,7 @@ export function ControlPanel({ onGenerateClick, isGenerating }: ControlPanelProp
           />
         )}
         
-        <div className="flex items-center justify-center space-x-3 relative z-10">
+        <div className="flex items-center justify-center space-x-2 sm:space-x-3 relative z-10">
           <motion.div
             animate={isGenerating ? { rotate: 360 } : { rotate: 0 }}
             transition={{ 
@@ -80,7 +80,7 @@ export function ControlPanel({ onGenerateClick, isGenerating }: ControlPanelProp
               ease: "linear"
             }}
           >
-            <FaRandom className="text-2xl" />
+            <FaRandom className="text-lg sm:text-xl md:text-2xl" />
           </motion.div>
           
           <motion.span
