@@ -77,8 +77,8 @@ export default function Home() {
       
       setTimeout(() => {
         setIsChangingFxType(false);
-      }, 100);
-    }, 300);
+      }, 50);
+    }, 150);
   };
 
   // Animation variants for page transitions
@@ -122,17 +122,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b border-[#FF0000]/30 py-5 px-4 md:px-6">
+      <header className="border-b border-[#00FF00]/30 py-5 px-4 md:px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <FaRandom className="text-[#FF0000] text-3xl animate-pulse" />
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#00FF00] animate-glow">
+          <div>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#00FF00]">
               Random FX for Looper
             </h1>
           </div>
           <div className="hidden md:flex items-center text-[#33FF33] text-lg">
             <span className="mr-2 opacity-80">RC505mk2</span>
-            <div className="h-6 w-6 rounded-full bg-[#FF0000] animate-pulse"></div>
+            <div className="h-6 w-6 rounded-full bg-[#00FF00] animate-pulse"></div>
           </div>
         </div>
       </header>
@@ -140,7 +139,7 @@ export default function Home() {
       <main className="flex-1 py-10 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Digital-style display */}
-          <div className="rounded-md bg-black border-2 border-[#FF0000]/40 mb-8 overflow-hidden relative shadow-[0_0_25px_rgba(255,0,0,0.2)]">
+          <div className="rounded-md bg-black border-2 border-[#00FF00]/40 mb-8 overflow-hidden relative shadow-[0_0_25px_rgba(0,255,0,0.2)]">
             <div className="scanline"></div>
             <div className="p-4 md:p-8">
               <div className="flex flex-col md:flex-row md:justify-between mb-8 items-start md:items-center">
@@ -149,12 +148,12 @@ export default function Home() {
                 </h2>
                 <div className="flex items-center text-lg space-x-6">
                   <div className="flex items-center">
-                    <span className={`h-4 w-4 rounded-full bg-[#FF0000] ${isGenerating ? "animate-pulse" : ""} mr-2`}></span>
+                    <span className={`h-4 w-4 rounded-full bg-[#00FF00] ${isGenerating ? "animate-pulse" : ""} mr-2`}></span>
                     <span className="opacity-70">{status}</span>
                   </div>
                   <div className="flex items-center">
                     <span className="mr-2 opacity-70">SYSTEM:</span>
-                    <span className="text-[#FF0000]">ONLINE</span>
+                    <span className="text-[#00FF00]">ONLINE</span>
                   </div>
                 </div>
               </div>
@@ -205,7 +204,7 @@ export default function Home() {
         </div>
       </main>
       
-      <footer className="border-t border-[#FF0000]/30 py-5 px-4 md:px-6 text-base text-[#33FF33]/70">
+      <footer className="border-t border-[#00FF00]/30 py-5 px-4 md:px-6 text-base text-[#33FF33]/70">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div>
             <p>Random FX for Looper v1.0</p>
@@ -216,7 +215,7 @@ export default function Home() {
               href="https://twitter.com/arinomi" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-[#00FF00] hover:text-[#FF0000] transition-colors duration-300"
+              className="text-[#00FF00] hover:text-[#33FF33] transition-colors duration-300"
             >
               <FaTwitter />
             </a>

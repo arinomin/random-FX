@@ -20,11 +20,11 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
   return (
     <div className="cyber-selector w-full max-w-lg mx-auto mb-8 flex flex-col">
       <div className="text-center mb-3">
-        <span className="text-[#FF0000] opacity-80 text-2xl">// </span>
+        <span className="text-[#00FF00] opacity-80 text-2xl">// </span>
         <span className="text-2xl font-bold">SELECT FX TYPE</span>
       </div>
       
-      <div className="bg-black/40 backdrop-blur-sm border-2 border-[#FF0000]/40 rounded-lg p-2 flex relative overflow-hidden shadow-[0_0_20px_rgba(255,0,0,0.2)]">
+      <div className="bg-black/40 backdrop-blur-sm border-2 border-[#00FF00]/40 rounded-lg p-2 flex relative overflow-hidden shadow-[0_0_20px_rgba(0,255,0,0.2)]">
         {/* Animated background for selected state */}
         <motion.div 
           className="absolute top-0 bottom-0 bg-[#1A1A1A] rounded-md z-0"
@@ -35,7 +35,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
           animate={{ 
             left: fxType === "INPUT" ? "0%" : "50%",
             width: "50%",
-            boxShadow: ["0 0 10px #FF0000", "0 0 20px #FF0000, 0 0 30px #FF0000", "0 0 10px #FF0000"]
+            boxShadow: ["0 0 10px #00FF00", "0 0 20px #00FF00, 0 0 30px #00FF00", "0 0 10px #00FF00"]
           }}
           transition={{ 
             duration: 0.3,
@@ -55,7 +55,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
           onClick={() => handleSelect("INPUT")}
           className={`flex-1 py-4 px-4 text-center relative z-10 transition-all duration-300 rounded ${
             fxType === "INPUT" 
-              ? "text-[#FF0000] font-bold" 
+              ? "text-[#00FF00] font-bold" 
               : "text-[#00FF00]/70 hover:text-[#00FF00]"
           }`}
         >
@@ -63,7 +63,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
             <span className="text-2xl font-bold tracking-wider">INPUT FX</span>
             {fxType === "INPUT" && (
               <motion.div 
-                className="w-16 h-0.5 bg-[#FF0000] mt-2"
+                className="w-16 h-0.5 bg-[#00FF00] mt-2"
                 initial={{ width: 0 }}
                 animate={{ width: 64 }}
                 transition={{ duration: 0.3 }}
@@ -77,7 +77,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
           onClick={() => handleSelect("TRACK")}
           className={`flex-1 py-4 px-4 text-center relative z-10 transition-all duration-300 rounded ${
             fxType === "TRACK" 
-              ? "text-[#FF0000] font-bold" 
+              ? "text-[#00FF00] font-bold" 
               : "text-[#00FF00]/70 hover:text-[#00FF00]"
           }`}
         >
@@ -85,7 +85,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
             <span className="text-2xl font-bold tracking-wider">TRACK FX</span>
             {fxType === "TRACK" && (
               <motion.div 
-                className="w-16 h-0.5 bg-[#FF0000] mt-2"
+                className="w-16 h-0.5 bg-[#00FF00] mt-2"
                 initial={{ width: 0 }}
                 animate={{ width: 64 }}
                 transition={{ duration: 0.3 }}

@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 
 export function InfoPanel() {
   return (
-    <div className="rounded-md bg-[#1A1A1A]/50 border-2 border-[#FF0000]/30 p-4 md:p-6 mb-6 shadow-[0_0_15px_rgba(255,0,0,0.15)]">
-      <div className="border-b border-[#FF0000]/30 pb-3 mb-4">
-        <h3 className="text-[#FF0000] font-bold flex items-center text-xl">
+    <div className="rounded-md bg-[#1A1A1A]/50 border-2 border-[#00FF00]/30 p-4 md:p-6 mb-6 shadow-[0_0_15px_rgba(0,255,0,0.15)]">
+      <div className="border-b border-[#00FF00]/30 pb-3 mb-4">
+        <h3 className="text-[#00FF00] font-bold flex items-center text-xl">
           <motion.div
             initial={{ rotate: 0 }}
             animate={{ rotate: [0, 10, -10, 0] }}
@@ -13,25 +13,25 @@ export function InfoPanel() {
           >
             <FaInfoCircle className="mr-3 text-2xl" />
           </motion.div>
-          <span>ABOUT THIS TOOL</span>
+          <span>このツールについて</span>
         </h3>
       </div>
       <div className="text-lg space-y-4">
         <p>
-          <span className="text-[#FF0000] opacity-70">// </span>
-          This tool generates random effect combinations for the RC505mk2 loop station.
+          <span className="text-[#00FF00] opacity-70">// </span>
+          このツールはRC505mk2ループステーション用のランダムなエフェクトの組み合わせを生成します。
         </p>
         <p>
-          <span className="text-[#FF0000] opacity-70">// </span>
-          It randomly assigns effects to FX A through FX D channels, allowing for simultaneous layering.
+          <span className="text-[#00FF00] opacity-70">// </span>
+          FX AからFX Dチャンネルにエフェクトをランダムに割り当て、同時に複数のエフェクトを重ねることができます。
         </p>
         <p>
-          <span className="text-[#FF0000] opacity-70">// </span>
-          Select between INPUT FX or TRACK FX to determine which effect types are included in randomization.
+          <span className="text-[#00FF00] opacity-70">// </span>
+          INPUT FXまたはTRACK FXを選択して、ランダム化に含めるエフェクトタイプを決定します。
         </p>
         <p>
-          <span className="text-[#FF0000] opacity-70">// </span>
-          Click GENERATE to create new combinations and experiment with your loop station.
+          <span className="text-[#00FF00] opacity-70">// </span>
+          GENERATEをクリックして新しい組み合わせを作り、ループステーションで実験してみましょう。
         </p>
       </div>
     </div>

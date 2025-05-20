@@ -47,7 +47,7 @@ export function EffectCard({
       {/* Scanline effect */}
       <div className="scanline absolute top-0 left-0 w-full h-full"></div>
       
-      <div className="h-full flex flex-col justify-center items-center px-4 pt-6 transition-all duration-500">
+      <div className="h-full flex flex-col justify-center items-center px-4 pt-6 transition-all duration-250">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center">
             <motion.p 
@@ -60,7 +60,7 @@ export function EffectCard({
                 repeat: Infinity,
                 repeatType: "loop" 
               }}
-              className="text-3xl font-bold text-[#FF0000] text-center"
+              className="text-3xl font-bold text-[#00FF00] text-center"
             >
               SCANNING...
             </motion.p>
