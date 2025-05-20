@@ -40,7 +40,7 @@ export default function Home() {
     // Create array of random effects
     const selectedEffects = slots.map(() => {
       const randomIndex = Math.floor(Math.random() * effectsList.length);
-      return effectsList[randomIndex] || null;
+      return effectsList[randomIndex];
     });
     
     // Simulate processing delay before starting the sequential animation
@@ -142,33 +142,33 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b border-[#00FF00]/30 py-3 md:py-4 px-3 md:px-6">
+      <header className="border-b border-[#00FF00]/30 py-4 px-4 md:px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div>
-            <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-[#00FF00]">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#00FF00]">
               Random FX for Loopers
             </h1>
           </div>
-          <div className="flex items-center text-[#33FF33] text-sm md:text-base">
+          <div className="hidden md:flex items-center text-[#33FF33] text-base">
             <span className="mr-2 opacity-70">RC505mk2</span>
-            <div className="h-3 md:h-5 w-3 md:w-5 rounded-full bg-[#00CC00] animate-pulse"></div>
+            <div className="h-5 w-5 rounded-full bg-[#00CC00] animate-pulse"></div>
           </div>
         </div>
       </header>
       
-      <main className="flex-1 py-4 md:py-8 px-3 md:px-6">
+      <main className="flex-1 py-8 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           {/* Digital-style display */}
-          <div className="rounded-md bg-black border-2 border-[#1A1A1A] mb-4 md:mb-8 overflow-hidden relative">
+          <div className="rounded-md bg-black border-2 border-[#1A1A1A] mb-8 overflow-hidden relative">
             <div className="scanline"></div>
-            <div className="p-3 md:p-8">
-              <div className="flex flex-col md:flex-row md:justify-between mb-4 md:mb-6 items-start md:items-center">
-                <h2 className="text-lg md:text-2xl text-[#00FF00] mb-2 md:mb-0 font-bold">
+            <div className="p-4 md:p-8">
+              <div className="flex flex-col md:flex-row md:justify-between mb-6 items-start md:items-center">
+                <h2 className="text-xl md:text-2xl text-[#00FF00] mb-2 md:mb-0 font-bold">
                   <span className="opacity-70">// </span>Effect Combination Generator
                 </h2>
-                <div className="flex flex-wrap items-center text-sm md:text-base space-x-3 md:space-x-6">
+                <div className="flex items-center text-base space-x-6">
                   <div className="flex items-center">
-                    <span className={`h-2 md:h-3 w-2 md:w-3 rounded-full bg-[#00CC00] ${isGenerating ? "animate-pulse" : ""} mr-2`}></span>
+                    <span className={`h-3 w-3 rounded-full bg-[#00CC00] ${isGenerating ? "animate-pulse" : ""} mr-2`}></span>
                     <span className="opacity-70">{status}</span>
                   </div>
                   <div className="flex items-center">
@@ -188,7 +188,7 @@ export default function Home() {
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={fxType}
-                  className="grid grid-cols-2 xl:grid-cols-4 gap-3 md:gap-8 mb-4 md:mb-8"
+                  className="grid grid-cols-2 xl:grid-cols-4 gap-8 mb-8"
                   variants={containerVariants}
                   initial="hidden"
                   animate="visible"
@@ -223,14 +223,14 @@ export default function Home() {
         </div>
       </main>
       
-      <footer className="border-t border-[#00FF00]/30 py-3 md:py-4 px-3 md:px-6 text-xs md:text-sm text-[#33FF33]/70">
+      <footer className="border-t border-[#00FF00]/30 py-4 px-4 md:px-6 text-sm text-[#33FF33]/70">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div>
             <p>Random FX for Loopers v1.0</p>
           </div>
-          <div className="mt-2 md:mt-0 flex flex-col md:flex-row items-center space-y-1 md:space-y-0 md:space-x-2">
+          <div className="mt-2 md:mt-0 flex items-center space-x-2">
             <p>RC505mk2 Effect Randomizer Tool</p>
-            <span className="hidden md:inline px-2">|</span>
+            <span className="px-2">|</span>
             <p>Developed by <a href="https://twitter.com/arinomi" target="_blank" rel="noopener noreferrer" className="text-[#00FF00] hover:underline">@arinomi</a></p>
           </div>
         </div>

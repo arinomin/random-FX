@@ -1,7 +1,3 @@
-The FxTypeSelector component has been updated to be more responsive and mobile-friendly by adjusting font sizes, adding mobile-specific classes, and modifying the layout.
-```
-
-```replit_final_file
 import { useState } from "react";
 import { motion } from "framer-motion";
 
@@ -17,7 +13,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
     if (type !== fxType && !isAnimating) {
       setIsAnimating(true);
       onFxTypeChange(type);
-
+      
       // Reset animation state after transition completes
       setTimeout(() => setIsAnimating(false), 1200);
     }
@@ -29,7 +25,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
         <span className="text-[#00FF00] opacity-70 text-xl">// </span>
         <span className="text-xl font-bold">SELECT FX TYPE</span>
       </div>
-
+      
       <div className="bg-black/40 backdrop-blur-sm border-2 border-[#33FF33]/40 rounded-lg p-1 flex relative overflow-hidden">
         {/* Animated background for selected state */}
         <motion.div 
@@ -49,10 +45,10 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
             damping: 30
           }}
         />
-
+        
         {/* Scan line effect */}
         <div className="absolute top-0 left-0 w-full h-full scanline"></div>
-
+        
         {/* INPUT FX Button */}
         <button
           onClick={() => handleSelect("INPUT")}
@@ -79,7 +75,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
             )}
           </div>
         </button>
-
+        
         {/* TRACK FX Button */}
         <button
           onClick={() => handleSelect("TRACK")}
@@ -107,7 +103,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
           </div>
         </button>
       </div>
-
+      
       <div className="text-center text-base mt-2 text-[#33FF33]/70">
         {fxType === "INPUT" ? 
           "Standard effects for input processing" : 

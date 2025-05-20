@@ -45,22 +45,53 @@ export function ControlPanel({ onGenerateClick, isGenerating }: ControlPanelProp
   };
 
   return (
-    <div className="flex flex-col md:flex-row md:items-center justify-between p-3 md:p-4 border-t border-[#33FF33]/30 mt-3 md:mt-4">
-      <div className="text-[#33FF33]/70 text-xs md:text-base mb-3 md:mb-0">
-        <p>Click GENERATE to get a random combination of effects</p>
-      </div>
-      <button
-        onClick={onGenerateClick}
+    <div className="flex flex-col items-center justify-center">
+      <motion.button
+        variants={buttonVariants}
+        initial="idle"
+        animate={isGenerating ? "generating" : isPressed ? "pressed" : "idle"}
+        whileTap="pressed"
+        onClick={handleClick}
         disabled={isGenerating}
-        className={`flex items-center justify-center space-x-2 px-4 md:px-6 py-2 md:py-3 rounded-md font-bold text-sm md:text-base transition-all duration-300 ${
-          isGenerating
-            ? "bg-[#001800] text-[#008800] cursor-not-allowed"
-            : "bg-[#00FF00]/20 text-[#00FF00] hover:bg-[#00FF00]/30 border border-[#00FF00]/50"
+        className={`relative bg-[#1A1A1A] hover:bg-[#333333] border-2 border-[#00FF00]/50 rounded-lg py-5 px-10 font-bold text-2xl transition-colors duration-300 focus:outline-none w-full max-w-md disabled:cursor-not-allowed overflow-hidden ${
+          isPressed ? "bg-[#00FF00]" : ""
         }`}
       >
-        <FaRandom className={`${isGenerating ? "animate-spin" : ""} text-sm md:text-base`} />
-        <span>{isGenerating ? "GENERATING..." : "GENERATE"}</span>
-      </button>
+        {/* Background animation for generating state */}
+        {isGenerating && (
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00FF00]/20 to-transparent"
+            initial={{ x: "-100%" }}
+            animate={{ x: "200%" }}
+            transition={{ 
+              duration: 1.5, 
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        )}
+        
+        <div className="flex items-center justify-center space-x-3 relative z-10">
+          <motion.div
+            animate={isGenerating ? { rotate: 360 } : { rotate: 0 }}
+            transition={{ 
+              duration: 1.5, 
+              repeat: isGenerating ? Infinity : 0,
+              ease: "linear"
+            }}
+          >
+            <FaRandom className="text-2xl" />
+          </motion.div>
+          
+          <motion.span
+            variants={textVariants}
+            initial="idle"
+            animate={isGenerating ? "generating" : isPressed ? "pressed" : "idle"}
+          >
+            {isGenerating ? "GENERATING..." : "GENERATE RANDOM FX"}
+          </motion.span>
+        </div>
+      </motion.button>
     </div>
   );
 }
