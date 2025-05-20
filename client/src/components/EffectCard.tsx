@@ -35,9 +35,9 @@ export function EffectCard({
       <div className="absolute top-0 w-full text-center py-3 border-b border-[#33FF33]/30 bg-black/30 backdrop-blur-sm">
         <span className="text-[#00FF00] font-bold text-xl">FX {slot}</span>
       </div>
-      
+
       <div className="scanline absolute top-0 left-0 w-full h-full"></div>
-      
+
       <div className="h-full flex flex-col justify-center items-center px-2 transition-all duration-500">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center mt-10">
@@ -52,20 +52,20 @@ export function EffectCard({
           <div className="flex flex-col items-center justify-center mt-10">
             <motion.p
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ 
+              animate={{
                 opacity: shouldAnimate ? 1 : 0,
                 scale: shouldAnimate ? 1 : 0.8,
-                y: shouldAnimate ? 0 : 20 
+                y: shouldAnimate ? -10 : 20,  // Adjusted y value to be -10 for higher placement
               }}
               transition={{ duration: 0.4, type: "spring" }}
-              className="text-2xl font-bold text-[#00FF00] text-center"
+              className="text-2xl font-bold text-[#00FF00] text-center flex items-center justify-center h-full"
             >
-              {effectName}
+              {effectName || "SELECT EFFECT"}
             </motion.p>
           </div>
         )}
       </div>
-      
+
       {/* Bottom gradient accent */}
       <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t from-[#00FF00]/10 to-transparent"></div>
     </div>
