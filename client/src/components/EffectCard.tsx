@@ -31,20 +31,21 @@ export function EffectCard({
   }, [isLoading, effectName]);
 
   return (
-    <div className="effect-card w-52 h-52 mx-auto rounded-full bg-[#1A1A1A]/80 border-2 border-[#33FF33]/50 transition-all duration-300 flex flex-col items-center justify-center relative overflow-hidden">
-      <div className="absolute top-0 w-full text-center py-3 border-b border-[#33FF33]/30 bg-black/30 backdrop-blur-sm">
-        <span className="text-[#00FF00] font-bold text-xl">FX {slot}</span>
+    <div className="effect-card w-36 h-36 md:w-52 md:h-52 mx-auto rounded-full bg-[#1A1A1A]/80 border-2 border-[#33FF33]/50 transition-all duration-300 flex flex-col items-center justify-center relative overflow-hidden">
+      <div className="absolute top-0 w-full text-center py-2 md:py-3 border-b border-[#33FF33]/30 bg-black/30 backdrop-blur-sm">
+        <span className="text-[#00FF00] font-bold text-sm md:text-xl">FX {slot}</span>
       </div>
 
       <div className="scanline absolute top-0 left-0 w-full h-full"></div>
+      <div className="red-scan-effect animate-scan absolute top-0 left-0 w-full h-full"></div>
 
       <div className="h-full flex flex-col justify-center items-center px-2 transition-all duration-500">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center mt-10">
-            <p className="text-2xl font-semibold text-[#00FF00] animate-pulse text-center">
+            <p className="text-base md:text-2xl font-semibold text-[#00FF00] animate-pulse text-center">
               SCANNING...
             </p>
-            <p className="text-xs mt-2 text-center opacity-70 max-w-[90%]">
+            <p className="text-xs mt-1 md:mt-2 text-center opacity-70 max-w-[90%]">
               Searching effect database
             </p>
           </div>
@@ -62,7 +63,7 @@ export function EffectCard({
               type: "spring",
               bounce: 0.4
             }}
-            className="text-2xl font-bold text-[#00FF00] text-center flex items-center justify-center h-full"
+            className="text-base md:text-2xl font-bold text-[#00FF00] text-center flex items-center justify-center h-full"
           >
             {effectName || "SELECT EFFECT"}
           </motion.p>
