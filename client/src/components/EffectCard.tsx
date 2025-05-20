@@ -31,32 +31,33 @@ export function EffectCard({
   }, [isLoading, effectName]);
 
   return (
-    <div className="effect-card bg-[#1A1A1A]/80 border border-[#33FF33]/50 rounded transition-all duration-300">
-      <div className="border-b border-[#33FF33]/30 flex items-center justify-between py-2 px-3">
-        <span className="text-[#00FF00] font-bold">FX {slot}</span>
-        <span className="text-xs opacity-70">[SLOT {slotNumber}]</span>
+    <div className="effect-card w-48 h-48 mx-auto rounded-full bg-[#1A1A1A]/80 border-2 border-[#33FF33]/50 transition-all duration-300 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_0_15px_rgba(0,255,0,0.3)]">
+      <div className="absolute top-0 w-full text-center py-2 border-b border-[#33FF33]/30 bg-black/30 backdrop-blur-sm">
+        <span className="text-[#00FF00] font-bold text-lg">FX {slot}</span>
+        <span className="text-xs opacity-70 ml-2">[{slotNumber}]</span>
       </div>
-      <div className="p-4 h-28 flex flex-col justify-center relative transition-all duration-500">
-        <div className="scanline"></div>
-        
+      
+      <div className="scanline absolute top-0 left-0 w-full h-full"></div>
+      
+      <div className="h-full flex flex-col justify-center items-center px-4 pt-6 transition-all duration-500">
         {isLoading ? (
-          <>
-            <p className="text-lg font-semibold text-[#00FF00] animate-pulse text-center">
+          <div className="flex flex-col items-center justify-center mt-4">
+            <p className="text-xl font-semibold text-[#00FF00] animate-pulse text-center mt-2">
               SCANNING...
             </p>
-            <p className="text-xs mt-2 text-center opacity-70 max-w-[90%] mx-auto">
+            <p className="text-xs mt-2 text-center opacity-70 max-w-[90%]">
               Searching effect database
             </p>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="flex flex-col items-center justify-center mt-4">
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ 
                 opacity: shouldAnimate ? 1 : 0 
               }}
               transition={{ duration: 0.3 }}
-              className="text-lg font-semibold text-[#00FF00] animate-glow text-center"
+              className="text-xl font-semibold text-[#00FF00] animate-glow text-center mt-2"
             >
               {effectName}
             </motion.p>
@@ -66,13 +67,16 @@ export function EffectCard({
                 opacity: shouldAnimate ? 0.7 : 0 
               }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="text-xs mt-2 text-center opacity-70 max-w-[90%] mx-auto"
+              className="text-sm mt-3 text-center opacity-70 max-w-[85%]"
             >
               {effectDescription}
             </motion.p>
-          </>
+          </div>
         )}
       </div>
+      
+      {/* Bottom circular border accent */}
+      <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t from-[#00FF00]/10 to-transparent"></div>
     </div>
   );
 }

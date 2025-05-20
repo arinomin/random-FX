@@ -18,17 +18,17 @@ export function ControlPanel({ onGenerateClick, isGenerating }: ControlPanelProp
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
+    <div className="flex flex-col items-center justify-center">
       <motion.button
         whileTap={{ scale: 0.95 }}
         onClick={handleClick}
         disabled={isGenerating}
-        className={`cyber-button bg-[#1A1A1A] hover:bg-[#333333] text-[#00FF00] border border-[#00FF00]/50 rounded py-3 px-6 font-bold transition-all duration-300 hover:shadow-[0_0_10px_rgba(0,255,0,0.5)] focus:outline-none focus:ring-2 focus:ring-[#00FF00]/50 w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed ${
+        className={`cyber-button bg-[#1A1A1A] hover:bg-[#333333] text-[#00FF00] border-2 border-[#00FF00]/50 rounded-lg py-4 px-8 font-bold text-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,0,0.5)] focus:outline-none focus:ring-2 focus:ring-[#00FF00]/50 w-full max-w-md disabled:opacity-50 disabled:cursor-not-allowed ${
           isPressed ? "bg-[#00FF00] text-[#000000]" : ""
         }`}
       >
-        <div className="flex items-center justify-center space-x-2">
-          <FaRandom className={isGenerating ? "animate-spin" : ""} />
+        <div className="flex items-center justify-center space-x-3">
+          <FaRandom className={`text-xl ${isGenerating ? "animate-spin" : ""}`} />
           <span>{isGenerating ? "GENERATING..." : "GENERATE RANDOM FX"}</span>
         </div>
       </motion.button>
