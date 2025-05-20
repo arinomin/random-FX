@@ -107,6 +107,43 @@
     
     --accent: 0 0% 10%;
     --accent-foreground: 120 100% 57%;
+
+/* Button press effect */
+@keyframes buttonPress {
+  0% { transform: translateY(0) scale(1); box-shadow: 0 6px 0 #005500; }
+  40% { transform: translateY(3px) scale(0.98); box-shadow: 0 3px 0 #005500; }
+  100% { transform: translateY(5px) scale(0.95); box-shadow: 0 1px 0 #005500; }
+}
+
+.animate-press {
+  animation: buttonPress 0.2s ease forwards;
+}
+
+/* Button release effect */
+@keyframes buttonRelease {
+  0% { transform: translateY(5px) scale(0.95); box-shadow: 0 1px 0 #005500; }
+  70% { transform: translateY(-2px) scale(1.02); box-shadow: 0 7px 0 #005500; }
+  100% { transform: translateY(0) scale(1); box-shadow: 0 6px 0 #005500; }
+}
+
+.animate-release {
+
+/* Ripple effect */
+@keyframes ripple {
+  to {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 0.6s linear;
+  opacity: 0.3;
+}
+
+  animation: buttonRelease 0.4s ease forwards;
+}
+
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 0%;
