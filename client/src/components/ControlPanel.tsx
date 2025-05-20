@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import shuffleIcon from "@/assets/shuffle-icon.svg";
+import shuffleIcon from "@/components/ui/Randomizer.png";
 
 interface ControlPanelProps {
   onGenerateClick: () => void;
@@ -160,7 +160,7 @@ export function ControlPanel({ onGenerateClick, isGenerating }: ControlPanelProp
             }}
             className="bg-[#000000] p-0 rounded-full shadow-inner shadow-[#00FF00]/30 w-10 h-10 flex items-center justify-center overflow-hidden"
           >
-            <img src={shuffleIcon} alt="Shuffle" className="w-full h-full" />
+            <img src={shuffleIcon} alt="Shuffle" className="w-full h-full object-contain" />
           </motion.div>
 
           <motion.span
