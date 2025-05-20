@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { EffectCard } from "@/components/EffectCard";
 import { ControlPanel } from "@/components/ControlPanel";
 import { InfoPanel } from "@/components/InfoPanel";
 import { FxTypeSelector } from "@/components/FxTypeSelector";
 import { getEffects } from "@/data/effects";
-import { FaRandom } from "react-icons/fa";
 
 interface EffectSlot {
   id: string;
@@ -29,6 +28,7 @@ export default function Home() {
   
   const [isGenerating, setIsGenerating] = useState(false);
   const [status, setStatus] = useState("READY");
+  const [typeSwitching, setTypeSwitching] = useState(false);
 
   const generateRandomEffects = () => {
     setIsGenerating(true);
@@ -37,7 +37,7 @@ export default function Home() {
     // Get effects based on current FX type
     const effectsList = getEffects(fxType);
     
-    // Simulate processing delay
+    // Simulate processing delay with more dramatic animation
     setTimeout(() => {
       const newSlots = slots.map(slot => {
         const randomIndex = Math.floor(Math.random() * effectsList.length);
@@ -58,23 +58,75 @@ export default function Home() {
           setStatus("READY");
         }, 2000);
       }, 500);
-    }, 800);
+    }, 1000);
   };
 
-  // Reset effects when FX type changes
-  useEffect(() => {
-    setSlots(slots.map(slot => ({...slot, effect: null})));
-    setStatus("READY");
-  }, [fxType]);
+  // Handle FX type change with animation
+  const handleFxTypeChange = (type: "INPUT" | "TRACK") => {
+    setTypeSwitching(true);
+    
+    // Delay the actual type change to allow for animation
+    setTimeout(() => {
+      setFxType(type);
+      setSlots(slots.map(slot => ({...slot, effect: null})));
+      setStatus("READY");
+      
+      // End transition animation
+      setTimeout(() => {
+        setTypeSwitching(false);
+      }, 800);
+    }, 600);
+  };
+
+  // Card slide animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    },
+    exit: {
+      opacity: 0,
+      x: -1000,
+      transition: {
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+        when: "afterChildren"
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { x: 1000, opacity: 0 },
+    visible: { 
+      x: 0, 
+      opacity: 1,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100
+      }
+    },
+    exit: {
+      x: -1000,
+      opacity: 0,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
       <header className="border-b border-[#00FF00]/30 py-4 px-4 md:px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <FaRandom className="text-[#00FF00] text-2xl animate-pulse" />
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#00FF00] animate-glow">
-              Random FX for Looper
+          <div>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#00FF00]">
+              Random FX for Loopers
             </h1>
           </div>
           <div className="hidden md:flex items-center text-[#33FF33] text-base">
@@ -109,22 +161,36 @@ export default function Home() {
               {/* FX Type Selector */}
               <FxTypeSelector 
                 fxType={fxType} 
-                onFxTypeChange={setFxType} 
+                onFxTypeChange={handleFxTypeChange} 
               />
               
-              {/* Effects Grid - Updated for circular layout */}
-              <div className="grid grid-cols-2 xl:grid-cols-4 gap-8 mb-8">
-                {slots.map((slot) => (
-                  <EffectCard
-                    key={slot.id}
-                    slot={slot.letter}
-                    slotNumber={slot.number}
-                    effectName={slot.effect?.name || "SELECT EFFECT"}
-                    effectDescription={slot.effect?.description || "Generate a combination to see effect"}
-                    isLoading={isGenerating}
-                  />
-                ))}
-              </div>
+              {/* Effects Grid with animation */}
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={fxType}
+                  className="grid grid-cols-2 xl:grid-cols-4 gap-8 mb-8"
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                >
+                  {slots.map((slot, index) => (
+                    <motion.div
+                      key={`${fxType}-${slot.id}`}
+                      variants={cardVariants}
+                      custom={index}
+                    >
+                      <EffectCard
+                        slot={slot.letter}
+                        slotNumber={slot.number}
+                        effectName={slot.effect?.name || "SELECT EFFECT"}
+                        effectDescription={slot.effect?.description || ""}
+                        isLoading={isGenerating || typeSwitching}
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
               
               <ControlPanel 
                 onGenerateClick={generateRandomEffects}
@@ -140,10 +206,12 @@ export default function Home() {
       <footer className="border-t border-[#00FF00]/30 py-4 px-4 md:px-6 text-sm text-[#33FF33]/70">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div>
-            <p>Random FX for Looper v1.0</p>
+            <p>Random FX for Loopers v1.0</p>
           </div>
-          <div className="mt-2 md:mt-0">
+          <div className="mt-2 md:mt-0 flex items-center space-x-2">
             <p>RC505mk2 Effect Randomizer Tool</p>
+            <span className="px-2">|</span>
+            <p>Developed by <a href="https://twitter.com/arinomi" target="_blank" rel="noopener noreferrer" className="text-[#00FF00] hover:underline">@arinomi</a></p>
           </div>
         </div>
       </footer>
