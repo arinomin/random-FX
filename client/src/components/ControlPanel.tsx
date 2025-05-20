@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { FaRandom } from "react-icons/fa";
+import shuffleIcon from "@/assets/shuffle-icon.svg";
 
 interface ControlPanelProps {
   onGenerateClick: () => void;
@@ -158,9 +158,9 @@ export function ControlPanel({ onGenerateClick, isGenerating }: ControlPanelProp
               repeat: isGenerating ? Infinity : 0,
               ease: "linear"
             }}
-            className="bg-[#003300] p-2 rounded-full shadow-inner shadow-[#00FF00]/30"
+            className="bg-[#000000] p-0 rounded-full shadow-inner shadow-[#00FF00]/30 w-10 h-10 flex items-center justify-center overflow-hidden"
           >
-            <FaRandom className="text-lg sm:text-xl md:text-2xl text-[#00FF00]" />
+            <img src={shuffleIcon} alt="Shuffle" className="w-full h-full" />
           </motion.div>
 
           <motion.span
