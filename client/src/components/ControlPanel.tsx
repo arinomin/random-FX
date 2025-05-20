@@ -34,14 +34,7 @@ export function ControlPanel({ onGenerateClick, isGenerating }: ControlPanelProp
         setTimeout(() => ripple.remove(), 600);
       }
 
-      // Audio feedback (subtle click)
-      try {
-        const clickSound = new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQwAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAASAAAeMwAUFBQUHh4eHh4qKioqKioqPj4+Pj5ISEhISEhIXFxcXFxoaGhoaGhoeHh4eHiIiIiIiIiIlpaWlpaWqqqqqqqqqqq+vr6+vr7KysrKysrK3t7e3t7e6urq6urq6v7+/v7+/v4AAAAATGF2ZgAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAHjOZTf9/AAAAAAAAAAAAAAAAAAAA//tAxAAABTgDAUAAAAKTODc5JAEAAADvoO1Fzg+DAKvf4Tz+nAGBQCAdBwH+cLnCwPg+8PwfB8HgfB8HwfB8HwfB8HwfCAI/5wcEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQAAAABlEZ0KATgsK4IK5KOh4QQYfB8HwfB8HwfB8HwfCAIAj/nA4EAQBAEAQBAEAQBAEA//sQxBIAE7ADtDQEACN8AGujAAAAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQAAAAAJNGdF0ATgsKoELZKOR4QQcPg+D4Pg+D4Pg+D4PggCAI/5wOBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQAAAAA');
-        clickSound.volume = 0.2; // Subtle volume
-        clickSound.play();
-      } catch (e) {
-        // Fail silently if audio can't play
-      }
+      // Audio functionality removed
 
       setTimeout(() => setIsPressed(false), 400);
       onGenerateClick();
