@@ -20,11 +20,11 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
   return (
     <div className="cyber-selector w-full max-w-lg mx-auto mb-8 flex flex-col">
       <div className="text-center mb-3">
-        <span className="text-[#FF0000] opacity-80 text-2xl">// </span>
-        <span className="text-2xl font-bold">SELECT FX TYPE</span>
+        <span className="text-[#00FF00] opacity-80 text-2xl">// </span>
+        <span className="text-2xl font-bold">FXタイプ選択</span>
       </div>
       
-      <div className="bg-black/40 backdrop-blur-sm border-2 border-[#FF0000]/40 rounded-lg p-2 flex relative overflow-hidden shadow-[0_0_20px_rgba(255,0,0,0.2)]">
+      <div className="bg-black/40 backdrop-blur-sm border-2 border-[#00FF00]/40 rounded-lg p-2 flex relative overflow-hidden shadow-[0_0_15px_rgba(0,255,0,0.2)]">
         {/* Animated background for selected state */}
         <motion.div 
           className="absolute top-0 bottom-0 bg-[#1A1A1A] rounded-md z-0"
@@ -60,7 +60,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
           }`}
         >
           <div className="flex flex-col items-center">
-            <span className="text-2xl font-bold tracking-wider">INPUT FX</span>
+            <span className="text-2xl font-bold tracking-wider">インプットFX</span>
             {fxType === "INPUT" && (
               <motion.div 
                 className="w-16 h-0.5 bg-[#FF0000] mt-2"
@@ -82,7 +82,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
           }`}
         >
           <div className="flex flex-col items-center">
-            <span className="text-2xl font-bold tracking-wider">TRACK FX</span>
+            <span className="text-2xl font-bold tracking-wider">トラックFX</span>
             {fxType === "TRACK" && (
               <motion.div 
                 className="w-16 h-0.5 bg-[#FF0000] mt-2"

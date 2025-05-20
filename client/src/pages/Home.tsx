@@ -122,17 +122,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b border-[#FF0000]/30 py-5 px-4 md:px-6">
+      <header className="border-b border-[#00FF00]/30 py-5 px-4 md:px-6">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <FaRandom className="text-[#FF0000] text-3xl animate-pulse" />
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#00FF00] animate-glow">
-              Random FX for Looper
+          <div className="flex items-center">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#00FF00]">
+              ランダムFXジェネレーター
             </h1>
           </div>
           <div className="hidden md:flex items-center text-[#33FF33] text-lg">
             <span className="mr-2 opacity-80">RC505mk2</span>
-            <div className="h-6 w-6 rounded-full bg-[#FF0000] animate-pulse"></div>
+            <div className="h-6 w-6 rounded-full bg-[#00CC00] animate-pulse"></div>
           </div>
         </div>
       </header>
@@ -140,21 +139,21 @@ export default function Home() {
       <main className="flex-1 py-10 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Digital-style display */}
-          <div className="rounded-md bg-black border-2 border-[#FF0000]/40 mb-8 overflow-hidden relative shadow-[0_0_25px_rgba(255,0,0,0.2)]">
+          <div className="rounded-md bg-black border-2 border-[#00FF00]/40 mb-8 overflow-hidden relative shadow-[0_0_20px_rgba(0,255,0,0.2)]">
             <div className="scanline"></div>
             <div className="p-4 md:p-8">
               <div className="flex flex-col md:flex-row md:justify-between mb-8 items-start md:items-center">
                 <h2 className="text-2xl md:text-3xl text-[#00FF00] mb-2 md:mb-0 font-bold">
-                  <span className="opacity-70">// </span>Effect Combination Generator
+                  <span className="opacity-70">// </span>エフェクト組み合わせジェネレーター
                 </h2>
                 <div className="flex items-center text-lg space-x-6">
                   <div className="flex items-center">
-                    <span className={`h-4 w-4 rounded-full bg-[#FF0000] ${isGenerating ? "animate-pulse" : ""} mr-2`}></span>
-                    <span className="opacity-70">{status}</span>
+                    <span className={`h-4 w-4 rounded-full bg-[#00CC00] ${isGenerating ? "animate-pulse" : ""} mr-2`}></span>
+                    <span className="opacity-70">{status === "READY" ? "準備完了" : status === "PROCESSING" ? "処理中" : status === "COMPLETE" ? "完了" : status}</span>
                   </div>
                   <div className="flex items-center">
-                    <span className="mr-2 opacity-70">SYSTEM:</span>
-                    <span className="text-[#FF0000]">ONLINE</span>
+                    <span className="mr-2 opacity-70">システム:</span>
+                    <span className="text-[#00FF00]">オンライン</span>
                   </div>
                 </div>
               </div>
