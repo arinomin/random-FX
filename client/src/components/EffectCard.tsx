@@ -36,8 +36,10 @@ export function EffectCard({
         <span className="text-[#00FF00] font-bold text-sm md:text-xl">FX {slot}</span>
       </div>
 
-      <div className="scanline absolute top-0 left-0 w-full h-full"></div>
-      <div className="red-scan-effect animate-scan absolute top-0 left-0 w-full h-full"></div>
+      <div className="scanline absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+      {!isLoading && effectName && (
+        <div className="red-scan-effect animate-scan absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+      )}
 
       <div className="h-full flex flex-col justify-center items-center px-2 transition-all duration-500">
         {isLoading ? (

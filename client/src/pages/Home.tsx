@@ -40,7 +40,7 @@ export default function Home() {
     // Create array of random effects
     const selectedEffects = slots.map(() => {
       const randomIndex = Math.floor(Math.random() * effectsList.length);
-      return effectsList[randomIndex];
+      return effectsList[randomIndex] || null;
     });
     
     // Simulate processing delay before starting the sequential animation
