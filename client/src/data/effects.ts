@@ -4,7 +4,11 @@ export const inputEffects = [
   { id: 2, name: "BPF", description: "Band Pass Filter" },
   { id: 3, name: "HPF", description: "High Pass Filter" },
   { id: 4, name: "PHASER", description: "Creates a swooshing, phasing effect" },
-  { id: 5, name: "FLANGER", description: "Creates a swirling, jet-like effect" },
+  {
+    id: 5,
+    name: "FLANGER",
+    description: "Creates a swirling, jet-like effect",
+  },
   { id: 6, name: "SYNTH", description: "Synthesizer effect" },
   { id: 7, name: "LO-FI", description: "Reduces audio quality for effect" },
   { id: 8, name: "RADIO", description: "Radio transmission simulation" },
@@ -26,7 +30,11 @@ export const inputEffects = [
   { id: 24, name: "DIST", description: "Distortion effect" },
   { id: 25, name: "DYNAMICS", description: "Dynamic range processor" },
   { id: 26, name: "EQ", description: "Equalizer" },
-  { id: 27, name: "ISOLATOR", description: "Isolates specific frequency bands" },
+  {
+    id: 27,
+    name: "ISOLATOR",
+    description: "Isolates specific frequency bands",
+  },
   { id: 28, name: "OCTAVE", description: "Adds notes one octave up/down" },
   { id: 29, name: "AUTO PAN", description: "Automatic panning effect" },
   { id: 30, name: "MANUAL PAN", description: "Manual panning control" },
@@ -50,7 +58,7 @@ export const inputEffects = [
   { id: 48, name: "CHORUS", description: "Creates a rich, shimmering sound" },
   { id: 49, name: "REVERB", description: "Adds space and ambience" },
   { id: 50, name: "GATE REVERB", description: "Gated reverb effect" },
-  { id: 51, name: "REVERSE REVERB", description: "Backwards reverb effect" }
+  { id: 51, name: "REVERSE REVERB", description: "Backwards reverb effect" },
 ];
 
 // Additional TRACK FX effects
@@ -58,10 +66,23 @@ export const trackFxOnly = [
   { id: 52, name: "BEAT SCATTER", description: "Rearranges beat segments" },
   { id: 53, name: "BEAT REPEAT", description: "Repeats sections of audio" },
   { id: 54, name: "BEAT SHIFT", description: "Shifts beat timing" },
-  { id: 55, name: "VINYL FLICK", description: "Vinyl record scratch effect" }
+  { id: 55, name: "VINYL FLICK", description: "Vinyl record scratch effect" },
 ];
 
-// Combined effects list for TRACK FX selection
-export const getEffects = (fxType: "INPUT" | "TRACK") => {
-  return fxType === "INPUT" ? inputEffects : [...inputEffects, ...trackFxOnly];
+// Combined effects list for FX type selection
+export const getEffects = (fxType: "INPUT" | "TRACK", isFXA: boolean = false) => {
+  if (fxType === "TRACK") {
+    if (isFXA) {
+      return [
+        ...inputEffects, // 既存の入力エフェクトを含める
+        // TRACK FX Aのみに適用されるエフェクトを追加
+        { id: 52, name: "BEAT SCATTER", description: "Rearranges beat segments" },
+        { id: 53, name: "BEAT REPEAT", description: "Repeats sections of audio" },
+        { id: 54, name: "BEAT SHIFT", description: "Shifts beat timing" },
+        { id: 55, name: "VINYL FLICK", description: "Vinyl record scratch effect" },
+      ];
+    }
+    return inputEffects; // FX A 以外のTRACKの場合は入力エフェクトのみを返す
+  }
+  return inputEffects; // INPUTの場合は入力エフェクトのみを返す
 };
