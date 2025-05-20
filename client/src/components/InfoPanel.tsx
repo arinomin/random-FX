@@ -24,6 +24,10 @@ export function InfoPanel() {
         </p>
         <p>
           <span className="text-[#00FF00] opacity-70">// </span>
+          When using TRACK FX, FX A will have special beat-based effects that are not available for other FX channels.
+        </p>
+        <p>
+          <span className="text-[#00FF00] opacity-70">// </span>
           Click GENERATE to create new combinations and experiment with your loop station.
         </p>
       </div>

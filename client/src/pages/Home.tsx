@@ -19,7 +19,6 @@ interface EffectSlot {
 
 export default function Home() {
   const [fxType, setFxType] = useState<"INPUT" | "TRACK">("INPUT");
-  const [isFXA, setIsFXA] = useState(false);
   const [slots, setSlots] = useState<EffectSlot[]>([
     { id: "A", letter: "A", number: "01", effect: null },
     { id: "B", letter: "B", number: "02", effect: null },
@@ -35,11 +34,12 @@ export default function Home() {
     setIsGenerating(true);
     setStatus("PROCESSING");
     
-    // Get effects based on current FX type
-    const effectsList = getEffects(fxType, fxType === "TRACK" && isFXA);
-    
-    // Create array of random effects
-    const selectedEffects = slots.map(() => {
+    // Create array of random effects based on slot type
+    const selectedEffects = slots.map((slot) => {
+      // Get effects based on current FX type and whether it's FX A
+      const isFXA = slot.id === "A"; // FX A判定
+      const effectsList = getEffects(fxType, fxType === "TRACK" && isFXA);
+      
       const randomIndex = Math.floor(Math.random() * effectsList.length);
       return effectsList[randomIndex];
     });
@@ -85,9 +85,6 @@ export default function Home() {
   // Handle FX type change with animation
   const handleFxTypeChange = (type: "INPUT" | "TRACK") => {
     setTypeSwitching(true);
-    
-    // Set isFXA based on fxType
-    setIsFXA(type === "TRACK"); 
     
     // Delay the actual type change to allow for animation
     setTimeout(() => {
