@@ -242,7 +242,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-[#00FF00] hover:underline"
               >
-                @arinomi
+                arinomi
               </a>
             </p>
           </div>
