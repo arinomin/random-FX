@@ -37,27 +37,47 @@ export default function Home() {
     // Get effects based on current FX type
     const effectsList = getEffects(fxType);
     
-    // Simulate processing delay with more dramatic animation
+    // Create array of random effects
+    const selectedEffects = slots.map(() => {
+      const randomIndex = Math.floor(Math.random() * effectsList.length);
+      return effectsList[randomIndex];
+    });
+    
+    // Simulate processing delay before starting the sequential animation
     setTimeout(() => {
-      const newSlots = slots.map(slot => {
-        const randomIndex = Math.floor(Math.random() * effectsList.length);
-        return {
-          ...slot,
-          effect: effectsList[randomIndex]
-        };
-      });
+      // Reset all slots first
+      setSlots(slots.map(slot => ({...slot, effect: null})));
       
-      setSlots(newSlots);
-      
-      setTimeout(() => {
-        setStatus("COMPLETE");
-        setIsGenerating(false);
-        
-        // After brief delay, return to ready state
+      // Sequentially confirm each slot from left to right
+      slots.forEach((slot, index) => {
         setTimeout(() => {
-          setStatus("READY");
-        }, 2000);
-      }, 500);
+          setSlots(currentSlots => {
+            return currentSlots.map((s, i) => {
+              // Only update the current slot in the sequence
+              if (i === index) {
+                return {
+                  ...s,
+                  effect: selectedEffects[index]
+                };
+              }
+              return s;
+            });
+          });
+          
+          // When last slot is confirmed, complete the process
+          if (index === slots.length - 1) {
+            setTimeout(() => {
+              setStatus("COMPLETE");
+              setIsGenerating(false);
+              
+              // After brief delay, return to ready state
+              setTimeout(() => {
+                setStatus("READY");
+              }, 2000);
+            }, 500);
+          }
+        }, index * 600); // 600ms delay between each slot confirmation
+      });
     }, 1000);
   };
 

@@ -4,6 +4,36 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes scan {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes rotate-scan {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.red-scan-effect {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 0, 0, 0) 45%, rgba(255, 0, 0, 0.8) 50%, rgba(255, 0, 0, 0) 55%, transparent 100%);
+  background-size: 200% 100%;
+  border-radius: 50%;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.animate-scan {
+  animation: scan 2s linear infinite, rotate-scan 8s linear infinite;
+}
+
 @layer base {
   :root {
     --background: 0 0% 0%;

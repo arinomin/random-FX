@@ -51,17 +51,21 @@ export function EffectCard({
         ) : (
           <div className="flex flex-col items-center justify-center mt-10">
             <motion.p
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{
-                opacity: shouldAnimate ? 1 : 0,
-                scale: shouldAnimate ? 1 : 0.8,
-                y: shouldAnimate ? -10 : 20,  // Adjusted y value to be -10 for higher placement
-              }}
-              transition={{ duration: 0.4, type: "spring" }}
-              className="text-2xl font-bold text-[#00FF00] text-center flex items-center justify-center h-full"
-            >
-              {effectName || "SELECT EFFECT"}
-            </motion.p>
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{
+              opacity: shouldAnimate ? 1 : 0,
+              scale: shouldAnimate ? [0.8, 1.1, 1] : 0.8, // Add bounce effect
+              y: shouldAnimate ? -10 : 20, // Higher placement
+            }}
+            transition={{ 
+              duration: shouldAnimate ? 0.6 : 0.4, 
+              type: "spring",
+              bounce: 0.4
+            }}
+            className="text-2xl font-bold text-[#00FF00] text-center flex items-center justify-center h-full"
+          >
+            {effectName || "SELECT EFFECT"}
+          </motion.p>
           </div>
         )}
       </div>
