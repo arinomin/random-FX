@@ -13,7 +13,6 @@ export function EffectCard({
   slot,
   slotNumber,
   effectName,
-  effectDescription,
   isLoading,
 }: EffectCardProps) {
   const [shouldAnimate, setShouldAnimate] = useState(false);
@@ -31,52 +30,75 @@ export function EffectCard({
   }, [isLoading, effectName]);
 
   return (
-    <div className="effect-card w-48 h-48 mx-auto rounded-full bg-[#1A1A1A]/80 border-2 border-[#33FF33]/50 transition-all duration-300 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_0_15px_rgba(0,255,0,0.3)]">
-      <div className="absolute top-0 w-full text-center py-2 border-b border-[#33FF33]/30 bg-black/30 backdrop-blur-sm">
-        <span className="text-[#00FF00] font-bold text-lg">FX {slot}</span>
-        <span className="text-xs opacity-70 ml-2">[{slotNumber}]</span>
+    <div className="effect-card w-52 h-52 mx-auto rounded-full bg-[#1A1A1A]/80 border-2 border-[#FF0000]/40 transition-all duration-300 flex flex-col items-center justify-center relative overflow-hidden">
+      {/* Rotating border animation */}
+      <div className="absolute inset-0 rounded-full border-4 border-transparent" style={{
+        backgroundImage: 'linear-gradient(transparent, transparent), linear-gradient(to right, #FF0000, #FF3300)',
+        backgroundOrigin: 'border-box',
+        backgroundClip: 'content-box, border-box',
+        animation: 'spin 8s linear infinite'
+      }}></div>
+      
+      {/* FX label at top */}
+      <div className="absolute top-0 w-full text-center py-3">
+        <span className="text-[#00FF00] font-bold text-2xl">FX {slot}</span>
       </div>
       
+      {/* Scanline effect */}
       <div className="scanline absolute top-0 left-0 w-full h-full"></div>
       
       <div className="h-full flex flex-col justify-center items-center px-4 pt-6 transition-all duration-500">
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center mt-4">
-            <p className="text-xl font-semibold text-[#00FF00] animate-pulse text-center mt-2">
+          <div className="flex flex-col items-center justify-center">
+            <motion.p 
+              animate={{ 
+                scale: [1, 1.1, 1],
+                opacity: [0.7, 1, 0.7] 
+              }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Infinity,
+                repeatType: "loop" 
+              }}
+              className="text-3xl font-bold text-[#FF0000] text-center"
+            >
               SCANNING...
-            </p>
-            <p className="text-xs mt-2 text-center opacity-70 max-w-[90%]">
-              Searching effect database
-            </p>
+            </motion.p>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center mt-4">
+          <motion.div 
+            className="flex flex-col items-center justify-center" 
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ 
+              opacity: shouldAnimate ? 1 : 0,
+              scale: shouldAnimate ? 1 : 0.5 
+            }}
+            transition={{ 
+              duration: 0.5,
+              type: "spring",
+              stiffness: 200
+            }}
+          >
             <motion.p
-              initial={{ opacity: 0 }}
+              className="text-3xl font-bold text-[#00FF00] text-center"
               animate={{ 
-                opacity: shouldAnimate ? 1 : 0 
+                textShadow: [
+                  '0 0 5px #00FF00, 0 0 10px #00FF00', 
+                  '0 0 10px #00FF00, 0 0 20px #00FF00, 0 0 30px #00FF00', 
+                  '0 0 5px #00FF00, 0 0 10px #00FF00'
+                ]
               }}
-              transition={{ duration: 0.3 }}
-              className="text-xl font-semibold text-[#00FF00] animate-glow text-center mt-2"
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse" 
+              }}
             >
               {effectName}
             </motion.p>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ 
-                opacity: shouldAnimate ? 0.7 : 0 
-              }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="text-sm mt-3 text-center opacity-70 max-w-[85%]"
-            >
-              {effectDescription}
-            </motion.p>
-          </div>
+          </motion.div>
         )}
       </div>
-      
-      {/* Bottom circular border accent */}
-      <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t from-[#00FF00]/10 to-transparent"></div>
     </div>
   );
 }

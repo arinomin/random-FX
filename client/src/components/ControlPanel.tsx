@@ -13,23 +13,133 @@ export function ControlPanel({ onGenerateClick, isGenerating }: ControlPanelProp
 
   const handleClick = () => {
     setIsPressed(true);
-    setTimeout(() => setIsPressed(false), 200);
+    setTimeout(() => setIsPressed(false), 300);
     onGenerateClick();
   };
 
+  // Animation variants for the button
+  const buttonVariants = {
+    idle: {
+      boxShadow: "0 0 10px rgba(255,0,0,0.5)",
+      transition: {
+        duration: 0.5
+      }
+    },
+    hover: {
+      scale: 1.02,
+      boxShadow: "0 0 20px rgba(255,0,0,0.8), 0 0 30px rgba(255,0,0,0.4)",
+      transition: {
+        duration: 0.3,
+        yoyo: Infinity,
+        ease: "easeInOut"
+      }
+    },
+    pressed: {
+      scale: 0.98,
+      boxShadow: "0 0 5px rgba(255,0,0,0.5)",
+      transition: {
+        duration: 0.1
+      }
+    },
+    generating: {
+      scale: [1, 1.03, 1],
+      boxShadow: [
+        "0 0 15px rgba(255,0,0,0.5)", 
+        "0 0 30px rgba(255,0,0,0.8), 0 0 40px rgba(255,0,0,0.4)", 
+        "0 0 15px rgba(255,0,0,0.5)"
+      ],
+      transition: {
+        duration: 1.5,
+        repeat: Infinity,
+        repeatType: "loop" as const
+      }
+    }
+  };
+
+  // Animation variants for the text
+  const textVariants = {
+    idle: {
+      color: "#FF0000",
+      textShadow: "0 0 5px rgba(255,0,0,0.8)"
+    },
+    hover: {
+      color: "#FF0000",
+      textShadow: "0 0 10px rgba(255,0,0,0.8), 0 0 15px rgba(255,0,0,0.5)",
+      transition: {
+        duration: 0.3
+      }
+    },
+    generating: {
+      color: "#FF0000",
+      textShadow: [
+        "0 0 5px rgba(255,0,0,0.8)", 
+        "0 0 15px rgba(255,0,0,0.8), 0 0 20px rgba(255,0,0,0.5)", 
+        "0 0 5px rgba(255,0,0,0.8)"
+      ],
+      transition: {
+        duration: 1.2,
+        repeat: Infinity,
+        repeatType: "loop" as const
+      }
+    }
+  };
+
+  const iconVariants = {
+    idle: { rotate: 0 },
+    hover: { rotate: [0, 15, -15, 0], transition: { duration: 0.5, repeat: Infinity } },
+    generating: { 
+      rotate: 360,
+      transition: { 
+        duration: 1,
+        repeat: Infinity,
+        ease: "linear"
+      }
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center mb-4">
       <motion.button
-        whileTap={{ scale: 0.95 }}
+        variants={buttonVariants}
+        initial="idle"
+        whileHover="hover"
+        whileTap="pressed"
+        animate={isGenerating ? "generating" : "idle"}
         onClick={handleClick}
         disabled={isGenerating}
-        className={`cyber-button bg-[#1A1A1A] hover:bg-[#333333] text-[#00FF00] border-2 border-[#00FF00]/50 rounded-lg py-4 px-8 font-bold text-xl transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,255,0,0.5)] focus:outline-none focus:ring-2 focus:ring-[#00FF00]/50 w-full max-w-md disabled:opacity-50 disabled:cursor-not-allowed ${
-          isPressed ? "bg-[#00FF00] text-[#000000]" : ""
-        }`}
+        className="cyber-button relative bg-[#1A1A1A] text-[#FF0000] border-2 border-[#FF0000]/70 rounded-lg py-5 px-10 font-bold text-2xl w-full max-w-lg disabled:cursor-not-allowed overflow-hidden"
       >
-        <div className="flex items-center justify-center space-x-3">
-          <FaRandom className={`text-xl ${isGenerating ? "animate-spin" : ""}`} />
-          <span>{isGenerating ? "GENERATING..." : "GENERATE RANDOM FX"}</span>
+        {/* Background animation for generating state */}
+        {isGenerating && (
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FF0000]/10 to-transparent"
+            animate={{
+              x: ["100%", "-100%"]
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        )}
+
+        <div className="flex items-center justify-center space-x-4 relative z-10">
+          <motion.div
+            variants={iconVariants}
+            animate={isGenerating ? "generating" : isPressed ? "generating" : "idle"}
+            className="text-2xl"
+          >
+            <FaRandom />
+          </motion.div>
+          
+          <motion.span
+            variants={textVariants}
+            initial="idle"
+            animate={isGenerating ? "generating" : "idle"}
+          >
+            {isGenerating ? "GENERATING..." : "GENERATE RANDOM FX"}
+          </motion.span>
         </div>
       </motion.button>
     </div>
