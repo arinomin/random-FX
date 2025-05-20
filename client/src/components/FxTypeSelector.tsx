@@ -18,33 +18,25 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
   };
 
   return (
-    <div className="cyber-selector w-full max-w-lg mx-auto mb-8 flex flex-col">
-      <div className="text-center mb-3">
-        <span className="text-[#00FF00] opacity-80 text-2xl">// </span>
-        <span className="text-2xl font-bold">SELECT FX TYPE</span>
+    <div className="cyber-selector w-full max-w-md mx-auto mb-6 flex flex-col">
+      <div className="text-center mb-2">
+        <span className="text-[#00FF00] opacity-70 text-lg">// </span>
+        <span className="text-lg font-bold">SELECT FX TYPE</span>
       </div>
       
-      <div className="bg-black/40 backdrop-blur-sm border-2 border-[#00FF00]/40 rounded-lg p-2 flex relative overflow-hidden shadow-[0_0_20px_rgba(0,255,0,0.2)]">
+      <div className="bg-black/40 backdrop-blur-sm border-2 border-[#33FF33]/40 rounded-lg p-1 flex relative overflow-hidden">
         {/* Animated background for selected state */}
         <motion.div 
-          className="absolute top-0 bottom-0 bg-[#1A1A1A] rounded-md z-0"
+          className="absolute top-0 bottom-0 bg-[#00FF00]/10 rounded-md z-0"
           initial={{ 
             left: fxType === "INPUT" ? "0%" : "50%", 
             width: "50%" 
           }}
           animate={{ 
             left: fxType === "INPUT" ? "0%" : "50%",
-            width: "50%",
-            boxShadow: ["0 0 10px #00FF00", "0 0 20px #00FF00, 0 0 30px #00FF00", "0 0 10px #00FF00"]
+            width: "50%"
           }}
-          transition={{ 
-            duration: 0.3,
-            boxShadow: { 
-              duration: 2, 
-              repeat: Infinity, 
-              repeatType: "reverse" 
-            } 
-          }}
+          transition={{ duration: 0.3 }}
         />
         
         {/* Scan line effect */}
@@ -53,19 +45,19 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
         {/* INPUT FX Button */}
         <button
           onClick={() => handleSelect("INPUT")}
-          className={`flex-1 py-4 px-4 text-center relative z-10 transition-all duration-300 rounded ${
+          className={`flex-1 py-3 px-4 text-center relative z-10 transition-all duration-300 rounded ${
             fxType === "INPUT" 
               ? "text-[#00FF00] font-bold" 
-              : "text-[#00FF00]/70 hover:text-[#00FF00]"
+              : "text-[#00FF00]/60 hover:text-[#00FF00]/80"
           }`}
         >
           <div className="flex flex-col items-center">
-            <span className="text-2xl font-bold tracking-wider">INPUT FX</span>
+            <span className="text-xl font-bold tracking-wider">INPUT FX</span>
             {fxType === "INPUT" && (
               <motion.div 
-                className="w-16 h-0.5 bg-[#00FF00] mt-2"
+                className="w-12 h-0.5 bg-[#00FF00] mt-1"
                 initial={{ width: 0 }}
-                animate={{ width: 64 }}
+                animate={{ width: 48 }}
                 transition={{ duration: 0.3 }}
               />
             )}
@@ -75,19 +67,19 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
         {/* TRACK FX Button */}
         <button
           onClick={() => handleSelect("TRACK")}
-          className={`flex-1 py-4 px-4 text-center relative z-10 transition-all duration-300 rounded ${
+          className={`flex-1 py-3 px-4 text-center relative z-10 transition-all duration-300 rounded ${
             fxType === "TRACK" 
               ? "text-[#00FF00] font-bold" 
-              : "text-[#00FF00]/70 hover:text-[#00FF00]"
+              : "text-[#00FF00]/60 hover:text-[#00FF00]/80"
           }`}
         >
           <div className="flex flex-col items-center">
-            <span className="text-2xl font-bold tracking-wider">TRACK FX</span>
+            <span className="text-xl font-bold tracking-wider">TRACK FX</span>
             {fxType === "TRACK" && (
               <motion.div 
-                className="w-16 h-0.5 bg-[#00FF00] mt-2"
+                className="w-12 h-0.5 bg-[#00FF00] mt-1"
                 initial={{ width: 0 }}
-                animate={{ width: 64 }}
+                animate={{ width: 48 }}
                 transition={{ duration: 0.3 }}
               />
             )}
@@ -95,7 +87,7 @@ export function FxTypeSelector({ fxType, onFxTypeChange }: FxTypeSelectorProps) 
         </button>
       </div>
       
-      <div className="text-center text-base mt-3 text-[#33FF33]/80">
+      <div className="text-center text-sm mt-2 text-[#33FF33]/70">
         {fxType === "INPUT" ? 
           "Standard effects for input processing" : 
           "Includes beat-based effects for track manipulation"}
