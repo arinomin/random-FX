@@ -25,7 +25,7 @@ export default function Home() {
     { id: "C", letter: "C", number: "03", effect: null },
     { id: "D", letter: "D", number: "04", effect: null },
   ]);
-  
+
   const [isGenerating, setIsGenerating] = useState(false);
   const [status, setStatus] = useState("READY");
   const [typeSwitching, setTypeSwitching] = useState(false);
@@ -33,44 +33,44 @@ export default function Home() {
   const generateRandomEffects = () => {
     setIsGenerating(true);
     setStatus("PROCESSING");
-    
+
     // Create array of random effects based on slot type
     const selectedEffects = slots.map((slot) => {
       // Get effects based on current FX type and whether it's FX A
       const isFXA = slot.id === "A"; // FX A判定
       const effectsList = getEffects(fxType, fxType === "TRACK" && isFXA);
-      
+
       const randomIndex = Math.floor(Math.random() * effectsList.length);
       return effectsList[randomIndex];
     });
-    
+
     // Simulate processing delay before starting the sequential animation
     setTimeout(() => {
       // Reset all slots first
-      setSlots(slots.map(slot => ({...slot, effect: null})));
-      
+      setSlots(slots.map((slot) => ({ ...slot, effect: null })));
+
       // Sequentially confirm each slot from left to right
       slots.forEach((slot, index) => {
         setTimeout(() => {
-          setSlots(currentSlots => {
+          setSlots((currentSlots) => {
             return currentSlots.map((s, i) => {
               // Only update the current slot in the sequence
               if (i === index) {
                 return {
                   ...s,
-                  effect: selectedEffects[index]
+                  effect: selectedEffects[index],
                 };
               }
               return s;
             });
           });
-          
+
           // When last slot is confirmed, complete the process
           if (index === slots.length - 1) {
             setTimeout(() => {
               setStatus("COMPLETE");
               setIsGenerating(false);
-              
+
               // After brief delay, return to ready state
               setTimeout(() => {
                 setStatus("READY");
@@ -85,13 +85,13 @@ export default function Home() {
   // Handle FX type change with animation
   const handleFxTypeChange = (type: "INPUT" | "TRACK") => {
     setTypeSwitching(true);
-    
+
     // Delay the actual type change to allow for animation
     setTimeout(() => {
       setFxType(type);
-      setSlots(slots.map(slot => ({...slot, effect: null})));
+      setSlots(slots.map((slot) => ({ ...slot, effect: null })));
       setStatus("READY");
-      
+
       // End transition animation
       setTimeout(() => {
         setTypeSwitching(false);
@@ -102,11 +102,11 @@ export default function Home() {
   // Card slide animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
+        staggerChildren: 0.1,
+      },
     },
     exit: {
       opacity: 0,
@@ -114,21 +114,21 @@ export default function Home() {
       transition: {
         staggerChildren: 0.05,
         staggerDirection: -1,
-        when: "afterChildren"
-      }
-    }
+        when: "afterChildren",
+      },
+    },
   };
 
   const cardVariants = {
     hidden: { x: 1000, opacity: 0 },
-    visible: { 
-      x: 0, 
+    visible: {
+      x: 0,
       opacity: 1,
       transition: {
         type: "spring",
         damping: 12,
-        stiffness: 100
-      }
+        stiffness: 100,
+      },
     },
     exit: {
       x: -1000,
@@ -136,9 +136,9 @@ export default function Home() {
       transition: {
         type: "spring",
         damping: 12,
-        stiffness: 100
-      }
-    }
+        stiffness: 100,
+      },
+    },
   };
 
   return (
@@ -156,7 +156,7 @@ export default function Home() {
           </div>
         </div>
       </header>
-      
+
       <main className="flex-1 py-4 sm:py-6 md:py-8 px-2 sm:px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
           {/* Digital-style display */}
@@ -169,7 +169,9 @@ export default function Home() {
                 </h2>
                 <div className="flex flex-wrap items-center text-xs sm:text-sm md:text-base space-x-4 sm:space-x-6">
                   <div className="flex items-center">
-                    <span className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-[#00CC00] ${isGenerating ? "animate-pulse" : ""} mr-1 sm:mr-2`}></span>
+                    <span
+                      className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full bg-[#00CC00] ${isGenerating ? "animate-pulse" : ""} mr-1 sm:mr-2`}
+                    ></span>
                     <span className="opacity-70">{status}</span>
                   </div>
                   <div className="flex items-center">
@@ -178,16 +180,16 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              
+
               {/* FX Type Selector */}
-              <FxTypeSelector 
-                fxType={fxType} 
-                onFxTypeChange={handleFxTypeChange} 
+              <FxTypeSelector
+                fxType={fxType}
+                onFxTypeChange={handleFxTypeChange}
               />
-              
+
               {/* Effects Grid with animation */}
               <AnimatePresence mode="wait">
-                <motion.div 
+                <motion.div
                   key={fxType}
                   className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8 mb-6 md:mb-8 max-w-[90%] sm:max-w-[95%] mx-auto"
                   variants={containerVariants}
@@ -212,18 +214,18 @@ export default function Home() {
                   ))}
                 </motion.div>
               </AnimatePresence>
-              
-              <ControlPanel 
+
+              <ControlPanel
                 onGenerateClick={generateRandomEffects}
                 isGenerating={isGenerating}
               />
             </div>
           </div>
-          
+
           <InfoPanel />
         </div>
       </main>
-      
+
       <footer className="border-t border-[#00FF00]/30 py-3 sm:py-4 px-3 sm:px-4 md:px-6 text-xs sm:text-sm text-[#33FF33]/70">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div>
@@ -232,7 +234,17 @@ export default function Home() {
           <div className="mt-2 md:mt-0 flex flex-col sm:flex-row items-center sm:space-x-2">
             <p>RC505mk2 Effect Randomizer Tool</p>
             <span className="hidden sm:inline px-2">|</span>
-            <p>Developed by <a href="https://twitter.com/arinomi" target="_blank" rel="noopener noreferrer" className="text-[#00FF00] hover:underline">@arinomi</a></p>
+            <p>
+              Developed by{" "}
+              <a
+                href="https://x.com/arinomi_loop"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#00FF00] hover:underline"
+              >
+                @arinomi
+              </a>
+            </p>
           </div>
         </div>
       </footer>
