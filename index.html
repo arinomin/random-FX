@@ -3,170 +3,133 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <title>Random FX for Looper - RC505mk2</title>
-    <meta name="description"
-        content="Generate random effect combinations for the RC505mk2 loop station. This tool helps musicians experiment with new sound combinations.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random FX Generator | RC505mk2</title>
+    <meta name="description" content="Generate random effect combinations for the RC505mk2 loop station.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Mono:wght@400;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <meta property="og:title" content="Random FX for Looper - RC505mk2">
-    <meta property="og:description"
-        content="Generate random effect combinations for the RC505mk2 loop station. This tool helps musicians experiment with new sound combinations.">
-    <meta property="og:type" content="website">
 </head>
 
 <body>
-    <div class="app-container">
+    <!-- Animated Background -->
+    <div class="bg-gradient"></div>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <div class="noise-overlay"></div>
+
+    <div class="app">
         <!-- Header -->
         <header class="header">
-            <div class="header-content">
-                <h1 class="header-title">Random FX for Loopers</h1>
-                <div class="header-status">
-                    <span class="device-name">RC505mk2</span>
-                    <div class="status-led"></div>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                    </svg>
                 </div>
+                <div class="logo-text">
+                    <span class="logo-title">RANDOM FX</span>
+                    <span class="logo-subtitle">RC505mk2</span>
+                </div>
+            </div>
+            <div class="header-badge">
+                <span class="badge-dot"></span>
+                <span>ONLINE</span>
             </div>
         </header>
 
         <!-- Main Content -->
-        <main class="main-content">
-            <div class="container">
-                <!-- Digital Display Panel -->
-                <div class="display-panel">
-                    <div class="scanline"></div>
+        <main class="main">
+            <!-- FX Type Toggle -->
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="inputBtn" data-mode="INPUT">
+                    <span class="mode-icon">🎤</span>
+                    <span class="mode-label">INPUT FX</span>
+                </button>
+                <button class="mode-btn" id="trackBtn" data-mode="TRACK">
+                    <span class="mode-icon">🎚️</span>
+                    <span class="mode-label">TRACK FX</span>
+                </button>
+                <div class="mode-slider" id="modeSlider"></div>
+            </div>
 
-                    <div class="panel-content">
-                        <!-- Panel Header -->
-                        <div class="panel-header">
-                            <h2 class="panel-title">
-                                <span class="comment">//</span> Effect Generator
-                            </h2>
-                            <div class="panel-status">
-                                <div class="status-item">
-                                    <span class="status-led-small" id="statusLed"></span>
-                                    <span class="status-text" id="statusText">READY</span>
-                                </div>
-                                <div class="status-item">
-                                    <span class="status-label">SYSTEM:</span>
-                                    <span class="status-value">ONLINE</span>
-                                </div>
-                            </div>
+            <!-- Effect Cards -->
+            <div class="cards-container">
+                <div class="effect-card" data-slot="A">
+                    <div class="card-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-label">FX A</div>
+                        <div class="card-effect" id="effectA">
+                            <span class="effect-text">—</span>
                         </div>
-
-                        <!-- FX Type Selector -->
-                        <div class="fx-type-selector">
-                            <div class="selector-label">
-                                <span class="comment">//</span>
-                                <span>SELECT FX TYPE</span>
-                            </div>
-                            <div class="selector-buttons">
-                                <div class="selector-bg" id="selectorBg"></div>
-                                <button class="selector-btn active" id="inputBtn" data-type="INPUT">
-                                    <span class="btn-text">INPUT FX</span>
-                                    <div class="btn-underline"></div>
-                                </button>
-                                <button class="selector-btn" id="trackBtn" data-type="TRACK">
-                                    <span class="btn-text">TRACK FX</span>
-                                    <div class="btn-underline"></div>
-                                </button>
-                            </div>
-                            <div class="selector-description" id="selectorDesc">
-                                Standard effects for input processing
-                            </div>
-                        </div>
-
-                        <!-- Effects Grid -->
-                        <div class="effects-grid" id="effectsGrid">
-                            <div class="effect-card" data-slot="A">
-                                <div class="card-header">FX A</div>
-                                <div class="scanline card-scanline"></div>
-                                <div class="card-content">
-                                    <p class="effect-name" id="effectA">SELECT EFFECT</p>
-                                </div>
-                                <div class="card-gradient"></div>
-                            </div>
-                            <div class="effect-card" data-slot="B">
-                                <div class="card-header">FX B</div>
-                                <div class="scanline card-scanline"></div>
-                                <div class="card-content">
-                                    <p class="effect-name" id="effectB">SELECT EFFECT</p>
-                                </div>
-                                <div class="card-gradient"></div>
-                            </div>
-                            <div class="effect-card" data-slot="C">
-                                <div class="card-header">FX C</div>
-                                <div class="scanline card-scanline"></div>
-                                <div class="card-content">
-                                    <p class="effect-name" id="effectC">SELECT EFFECT</p>
-                                </div>
-                                <div class="card-gradient"></div>
-                            </div>
-                            <div class="effect-card" data-slot="D">
-                                <div class="card-header">FX D</div>
-                                <div class="scanline card-scanline"></div>
-                                <div class="card-content">
-                                    <p class="effect-name" id="effectD">SELECT EFFECT</p>
-                                </div>
-                                <div class="card-gradient"></div>
-                            </div>
-                        </div>
-
-                        <!-- Generate Button -->
-                        <div class="button-container">
-                            <button class="generate-button" id="generateBtn">
-                                <div class="btn-bg-effect"></div>
-                                <div class="btn-progress" id="btnProgress"></div>
-                                <div class="btn-inner">
-                                    <div class="shuffle-icon" id="shuffleIcon">
-                                        <img src="Randomizer.jpg" alt="Shuffle" class="shuffle-img">
-                                    </div>
-                                    <span class="btn-label" id="btnLabel">GENERATE RANDOM FX</span>
-                                </div>
-                                <div class="btn-bottom-accent"></div>
-                            </button>
-                        </div>
+                        <div class="card-indicator"></div>
                     </div>
                 </div>
-
-                <!-- Info Panel -->
-                <div class="info-panel">
-                    <div class="info-header">
-                        <svg class="info-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
-                        </svg>
-                        <span>ABOUT THIS TOOL</span>
-                    </div>
-                    <div class="info-content">
-                        <p><span class="comment">//</span> This tool generates random effect combinations for the
-                            RC505mk2 loop station.</p>
-                        <p><span class="comment">//</span> It randomly assigns effects to FX A through FX D channels,
-                            allowing for simultaneous layering.</p>
-                        <p><span class="comment">//</span> Select between INPUT FX or TRACK FX to determine which effect
-                            types are included in randomization.</p>
-                        <p><span class="comment">//</span> When using TRACK FX, FX A will have special beat-based
-                            effects that are not available for other FX channels.</p>
-                        <p><span class="comment">//</span> Click GENERATE to create new combinations and experiment with
-                            your loop station.</p>
+                <div class="effect-card" data-slot="B">
+                    <div class="card-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-label">FX B</div>
+                        <div class="card-effect" id="effectB">
+                            <span class="effect-text">—</span>
+                        </div>
+                        <div class="card-indicator"></div>
                     </div>
                 </div>
+                <div class="effect-card" data-slot="C">
+                    <div class="card-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-label">FX C</div>
+                        <div class="card-effect" id="effectC">
+                            <span class="effect-text">—</span>
+                        </div>
+                        <div class="card-indicator"></div>
+                    </div>
+                </div>
+                <div class="effect-card" data-slot="D">
+                    <div class="card-glow"></div>
+                    <div class="card-inner">
+                        <div class="card-label">FX D</div>
+                        <div class="card-effect" id="effectD">
+                            <span class="effect-text">—</span>
+                        </div>
+                        <div class="card-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate Button -->
+            <div class="action-area">
+                <button class="generate-btn" id="generateBtn">
+                    <div class="btn-ring"></div>
+                    <div class="btn-inner">
+                        <div class="btn-icon">
+                            <img src="Randomizer.jpg" alt="Randomize" class="randomizer-img">
+                        </div>
+                        <span class="btn-text" id="btnText">RANDOMIZE</span>
+                    </div>
+                    <div class="btn-pulse"></div>
+                </button>
+            </div>
+
+            <!-- Info Section -->
+            <div class="info-section">
+                <p class="info-text">
+                    Select <strong>INPUT FX</strong> for standard effects or <strong>TRACK FX</strong> for beat-based
+                    effects on FX A.
+                </p>
             </div>
         </main>
 
         <!-- Footer -->
         <footer class="footer">
-            <div class="footer-content">
-                <p>Random FX for Loopers v1.0</p>
-                <div class="footer-right">
-                    <p>RC505mk2 Effect Randomizer Tool</p>
-                    <span class="divider">|</span>
-                    <p>Developed by <a href="https://x.com/arinomi_loop" target="_blank"
-                            rel="noopener noreferrer">arinomi</a></p>
-                </div>
-            </div>
+            <span>Built by <a href="https://x.com/arinomi_loop" target="_blank" rel="noopener">@arinomi_loop</a></span>
         </footer>
     </div>
 
